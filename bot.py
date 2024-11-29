@@ -4,7 +4,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
-from aiogram.filters import Command
+from aiogram.filters.command import Command
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -65,8 +65,12 @@ async def notify_admins(ticket: Ticket):
 # Команда /start
 @dp.message(Command(commands=["start"]))
 async def start_handler(message: types.Message):
-    kb = ReplyKeyboardMarkup(resize_keyboard=True)
-    kb.add(KeyboardButton("Создать тикет"))
+    kb = ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="Создать тикет")]  # Указываем текст кнопки
+        ],
+        resize_keyboard=True  # Опция для уменьшения размера кнопок
+    )
     await message.answer("Добро пожаловать! Нажмите 'Создать тикет', чтобы задать вопрос.", reply_markup=kb)
 
 # Создание тикета
