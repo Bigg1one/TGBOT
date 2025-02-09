@@ -18,7 +18,7 @@ from aiogram.types import BotCommand, BotCommandScopeDefault, BotCommandScopeCha
 # Настройки
 API_TOKEN = ''
 ADMIN_IDS = []  # ID администраторов
-# 1943086182
+
 # Логирование
 logging.basicConfig(level=logging.INFO)
 
